@@ -1,0 +1,29 @@
+{
+  "title": "Comparison, coherence and the stability of constructor entropy",
+  "author": "Samuel Mausberg",
+  "target_format": "IOP iopjournal class; Journal of Physics A research manuscript",
+  "pdf_pages": 25,
+  "abstract_words": 133,
+  "fresh_directory_build": true,
+  "latex_passes": 3,
+  "latex_diagnostics": [],
+  "unresolved_text_markers": [],
+  "text_bounds_violations": [],
+  "python_version": "3.13.5",
+  "pdflatex": "pdfTeX 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian)",
+  "class_git_blob_sha1": "8caa916e6ac72ff34e84e5a259e3107879f932b0",
+  "pdf_sha256": "1290338082e347adb5b9a0ce1c2de35d883933f498bc221463342ea546fe8f5f",
+  "finite_examples_checked": [
+    "1029-configuration clock",
+    "six 49-configuration work gates",
+    "98-configuration flag",
+    "49-dimensional Hadamard gate",
+    "98-dimensional controlled phase",
+    "exact returned marginals",
+    "entanglement witness",
+    "seven-level Gibbs engine"
+  ],
+  "proof_verification": "Written proofs, with cited prior structural theorems. Finite checks are not formal proof-assistant verification.",
+  "all_model_necessity_or_independence_resolved": false,
+  "rendered_pages_inspected": 25
+}

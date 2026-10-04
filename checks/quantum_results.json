@@ -1,0 +1,29 @@
+{
+  "flag": {
+    "configurations": 98,
+    "bijection": true,
+    "energy_preserved_exactly": true,
+    "involution": true,
+    "tested_t": [
+      "0",
+      "1",
+      "1/2",
+      "1/3",
+      "1/1000"
+    ],
+    "whole_control_marginal_returned_exactly": true,
+    "distance_from_sharp_flag": "t (linear identity, both endpoints checked)"
+  },
+  "stationary_quantum_example": {
+    "Hadamard_dimension": 49,
+    "Hadamard_orthogonality_entries_checked": 2401,
+    "arithmetic": "exact Q(sqrt(2)) for gate; rational density matrices",
+    "Hadamard_unitary": true,
+    "Hadamard_energy_preserving": true,
+    "controlled_phase_dimension": 98,
+    "controlled_phase_unitary_and_energy_preserving": true,
+    "output_is_equal_energy_flag_mixture": true,
+    "control_marginal_returned_exactly": true,
+    "entanglement_partial_transpose_expectation": "-1/2"
+  }
+}

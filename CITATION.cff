@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Please cite the manuscript and identify the repository commit used."
+type: software
+title: "Comparison, coherence and the stability of constructor entropy"
+authors:
+  - family-names: Mausberg
+    given-names: Samuel
+date-released: "2026-10-04"
+repository-code: "https://github.com/SamMausberg/constructor-entropy"
+url: "https://github.com/SamMausberg/constructor-entropy"
+license: MIT
+license-url: "https://github.com/SamMausberg/constructor-entropy/blob/main/LICENSE"
+preferred-citation:
+  type: unpublished
+  title: "Comparison, coherence and the stability of constructor entropy"
+  authors:
+    - family-names: Mausberg
+      given-names: Samuel
+  year: 2026
+  license: CC-BY-4.0
+  url: "https://github.com/SamMausberg/constructor-entropy/blob/main/constructor_entropy.pdf"
+  notes: "Research manuscript. Identify the repository commit used."

@@ -1,0 +1,250 @@
+\section{Exact-energy permutation conversion}\label{app:typical}
+This appendix gives the classical construction used in the stationary quantum completion. It is a specialization of correlated catalytic conversion, with the energy constraint proved on each microscopic shell rather than imposed only on a mean. The catalytic mechanism is credited to~\cite{Boes,Wilming2021,Wilming2022}. For comparison, the bath-free asymptotic theory of~\cite{Sparaciari} allows a discarded sublinear ancillary system; here every constructor register is returned as one marginal.
+
+Fix a finite configuration set with rational energies $e_i$. All permutations preserving the total energy of every configuration are allowed:
+\begin{equation}
+ p\mapsto Pp,\qquad e_{P(i)}=e_i.
+ \label{eq:dynamics}
+\end{equation}
+The diagonal quantum version is $P\rho P^\dagger$. A memory uses the same finite systems and zero-energy classical clocks. No random gate or discarded register is included in a closed task. The functions in~\eqref{eq:quantUH} reduce to
+\begin{equation}
+ U(p)=\sum_i p_i e_i,\qquad \HH(p)=-\sum_i p_i\log p_i,
+ \qquad 0\log0=0.
+ \label{eq:UH}
+\end{equation}
+
+\begin{lemma}[Closed classical conversion]\label{thm:closed}
+On every finite rational-energy system, the above dynamics and exact whole-memory return give
+\begin{equation}
+ p\plain q\quad\Longleftrightarrow\quad U(p)=U(q),\quad \HH(p)\le\HH(q).
+ \label{eq:closedcriterion}
+\end{equation}
+At each accuracy one finite circuit has the required marginal output on every fresh visit. Its output--memory mutual information equals the actual system entropy increase.
+\end{lemma}
+The proof occupies this appendix and Appendix~\ref{app:clock}. The block output used below is $\omega_n=P_n(p^{\otimes n})$, with
+\begin{equation}
+ q_n:=\frac1n\sum_{j=1}^n(\omega_n)_j\longrightarrow q,
+ \qquad \HH(\omega_n)=n\HH(p).
+ \label{eq:blockentropy}
+\end{equation}
+The average marginal is the quantity needed for the stationary-clock construction. There is no assumption that the block output is a product.
+
+\subsection{Finite-state entropy inequalities}
+For probability vectors $r,s$ with $s_i>0$ whenever $r_i>0$, the inequality $-\log x\ge1-x$ gives
+\[
+ \DD(r\Vert s)=\sum_{i:r_i>0}r_i
+       \left[-\log\frac{s_i}{r_i}\right]
+ \ge \sum_{i:r_i>0}(r_i-s_i)\ge0.
+\]
+Equality holds exactly when $r=s$. If $s$ vanishes on the support of $r$, the relative entropy is infinite and its nonnegativity is immediate.
+
+The function $-x\log x$, continuously extended to zero, is concave. A permutation merely reorders the summands and therefore preserves entropy. Additivity for product states follows by expanding $\log(r_i s_j)$. Expanding $\DD(r_{AB}\Vert r_A\otimes r_B)$ gives
+\begin{equation}
+ \II(A:B):=\HH(r_A)+\HH(r_B)-\HH(r_{AB})\ge0.
+ \label{eq:subadd}
+\end{equation}
+These facts also prove concavity of entropy for a mixture by applying concavity coordinatewise. Entropy is continuous on every fixed finite simplex because each summand is continuous. Compactness makes that continuity uniform when the alphabet size is bounded.
+
+For~\eqref{eq:return}, permutation invariance and~\eqref{eq:subadd} give
+\begin{equation}
+ \HH(p)+\HH(c)
+ =\HH(r_{MC})
+ \le\HH(r_M)+\HH(c).
+ \label{eq:necessity}
+\end{equation}
+Thus $\HH(r_M)\ge\HH(p)$ irrespective of the memory size. Additive microscopic energy conservation and $r_C=c$ give $U(r_M)=U(p)$. Taking $r_M\to q$ on the fixed system proves necessity in~\eqref{eq:closedcriterion}.
+
+\subsection{A lattice lemma}
+After shifting the energy zero and choosing a common unit, a finite rational spectrum has integer energies $e_1,\ldots,e_d$. A word of length $n$ has total energy $K$ if its occupation numbers $N_i$ satisfy $\sum_i N_i=n$ and $\sum_i e_iN_i=K$.
+
+\begin{lemma}\label{lem:lattice}
+Let $q_i>0$ and $\mu=\sum_i e_iq_i$, with a nonconstant integer spectrum. For any attainable shell $K$ with $|K/n-\mu|\to0$, there are occupation numbers $N_i\ge0$ in that shell such that
+\[
+ \max_i\left|\frac{N_i}{n}-q_i\right|
+ \le C\left(\left|\frac Kn-\mu\right|+\frac1n\right),
+\]
+where $C$ depends only on the spectrum and $q$, for all sufficiently large $n$.
+\end{lemma}
+\begin{proof}
+Choose two distinct energies $e_a,e_b$. The vector $v$ with
+$v_b=1/(e_b-e_a)$, $v_a=-1/(e_b-e_a)$ and other entries zero satisfies $\sum_i v_i=0$, $\sum_i e_iv_i=1$. Therefore
+$q(t)=q+(t-\mu)v$ is a strictly positive probability vector of mean $t$ when $t$ is sufficiently close to $\mu$.
+
+For $t=K/n$, round the first $d-1$ entries of $nq(t)$ down and choose the final entry so that the counts $M_i$ sum to $n$. All count errors are bounded by $d$. The residual $R=K-\sum_i e_iM_i$ is consequently an integer bounded in absolute value by a constant depending only on the spectrum.
+
+Let $g$ be the greatest common divisor of the differences $e_i-e_1$. Since $K$ is attainable, both $K$ and $\sum_i e_iM_i$ are congruent to $ne_1$ modulo $g$, so $g$ divides $R$. B\'ezout's identity supplies a fixed integer vector $b$ with $\sum_i b_i=0$ and $\sum_i e_ib_i=g$. Set $N=M+(R/g)b$. This corrects the energy exactly and preserves the number of cells. It changes each count by a bounded amount. Since every entry of $q(t)$ stays uniformly positive near $\mu$, the corrected counts are nonnegative for large $n$. Dividing by $n$ proves the estimate.
+\end{proof}
+For a constant spectrum there is only one shell. Ordinary rounding of $nq$ proves the corresponding assertion without an energy correction.
+
+\subsection{Counting and populating target types}
+A type is an empirical probability vector $t_i=N_i/n$. Its type class has
+\[
+ |T_t|=\frac{n!}{\prod_i N_i!}
+\]
+words. There are at most $(n+1)^d$ types. Two bounds will suffice:
+\begin{equation}
+ n\HH(t)-d\bigl[1+\log(n+1)\bigr]
+ \le\log|T_t|\le n\HH(t).
+ \label{eq:typebounds}
+\end{equation}
+For the upper bound, every word of type $t$ has probability $\exp[-n\HH(t)]$ under $t^{\otimes n}$, and their total probability is at most one. For the lower bound use, for $m\ge1$,
+\[
+ m\log m-m+1\le\log(m!)
+ \le m\log m-m+1+\log m,
+\]
+which follow by bounding the increasing function $\log x$ by its upper and lower integral sums. Apply the lower bound to $n!$, the upper bound to each nonzero $N_i!$, and use $0!=1$. This gives~\eqref{eq:typebounds}.
+
+\begin{lemma}[Exact-energy block conversion]\label{lem:block}
+Suppose $U(p)=U(q)$, $q$ has full support and $\HH(p)<\HH(q)$. For all sufficiently large $n$ there is an energy-preserving permutation $P_n$ of $n$ copies such that the average one-cell marginal of $\omega_n=P_n(p^{\otimes n})$ tends to $q$. Equation~\eqref{eq:blockentropy} holds.
+\end{lemma}
+\begin{proof}
+Set $\delta_n=n^{-1/4}$ and call a source word typical when each empirical frequency differs from $p_i$ by at most $\delta_n$. Chebyshev's inequality for each empirical frequency and a union bound give atypical probability at most
+\[
+ \eta_n\le\frac{d}{4n\delta_n^2}=\frac{d}{4\sqrt n}.
+\]
+Here Chebyshev follows directly from
+$\mathbb P(|X-\mathbb EX|\ge\delta)\delta^2
+\le\mathbb E[(X-\mathbb EX)^2]$ and the variance of a sample average. The independence of the input copies is used only in this block construction.
+
+By continuity of entropy on the finite simplex, the number of all typical words is at most
+\[
+ (n+1)^d\exp\{n[\HH(p)+a_n]\},
+ \qquad a_n\longrightarrow0.
+\]
+Every energy shell containing such a word has
+$|K/n-U(p)|\le\delta_n\sum_i|e_i|$.
+Lemma~\ref{lem:lattice} gives a target type $t_{K,n}$ in that \emph{same} shell, uniformly close to $q$. Its entropy is $\HH(q)+o(1)$ uniformly over those shells. By~\eqref{eq:typebounds}, its type class eventually contains more words than the entire typical source set, because $\HH(q)-\HH(p)>0$.
+
+In each such shell, inject the typical source words into the selected target type class. Extend this injection to a permutation of the full shell by choosing any bijection between the unused source and target words. Those complements have equal cardinality. Use the identity in all other shells. This gives one energy-preserving permutation $P_n$ on the full configuration set.
+
+Every output word assigned to shell $K$ from a typical source has empirical distribution $t_{K,n}$. The average of a state's one-cell marginals is its mean empirical distribution. This follows coordinatewise by summing the $n$ indicator functions for a given letter. Consequently the conditional average marginal for typical source words in shell $K$ equals $t_{K,n}$, regardless of their unequal probabilities. The atypical probability is at most $\eta_n$. If $\xi_n$ is the largest total-variation distance between $t_{K,n}$ and $q$ over typical shells, then
+\[
+ \tv\!\left(\frac1n\sum_{j=1}^n(\omega_n)_j,q\right)
+ \le\xi_n+\eta_n\longrightarrow0.
+\]
+Finally, permutation invariance gives $\HH(\omega_n)=n\HH(p)$ exactly. No randomization or deletion of a register occurs in the construction.
+\end{proof}
+
+\section{The stationary clock and the remaining conversion cases}\label{app:clock}
+The clock construction is included in full to make its return convention and energy accounting explicit. It is the energy-preserving permutation specialization of the catalytic construction in~\cite{Wilming2021,Wilming2022}.
+
+\subsection{One fixed finite circuit}
+Write $\omega_m$ for the ordered prefix marginal of $\omega_n$ on its first $m$ cells, with $\omega_0$ trivial. The memory consists of $n-1$ copies and a degenerate $n$-state clock, prepared in
+\begin{equation}
+ c_n=\frac1n\sum_{k=1}^n
+ p^{\otimes(k-1)}\otimes\omega_{n-k}\otimes\delta_k.
+ \label{eq:catalyst}
+\end{equation}
+This is one generally correlated memory state, not a list of independently returned marginals.
+
+\begin{figure}[tb]
+\centering
+\begin{quantikz}[row sep=0.7cm,column sep=1.0cm]
+\lstick{$p$} & \gate[2]{V_n} & \rstick{$q_n$}\qw \\
+\lstick{$c_n$} & & \rstick{$c_n$}\qw
+\end{quantikz}
+\caption{A single energy-preserving permutation returns the entire lower-wire marginal. The wires can leave correlated. Their mutual information is $\HH(q_n)-\HH(p)$, so replacing the final joint state by $q_n\otimes c_n$ would change the task. The same circuit works at every fresh visit.}
+\label{fig:clock}
+\end{figure}
+Take $\omega_n$ from Lemma~\ref{lem:block} and prepare~\eqref{eq:catalyst}. Conditional on clock value $n$, apply $P_n$ to the input and memory cells. Otherwise do nothing at this step. Cyclically rearrange the $n$ cells so that the last cell is released and the other $n-1$ become the new memory cells. Advance the clock, with $n$ followed by $1$.
+
+At clock value $k<n$, the state before rearrangement is
+\[
+ p^{\otimes k}\otimes\omega_{n-k}.
+\]
+After releasing its last cell, the remaining state is
+$p^{\otimes k}\otimes\omega_{n-k-1}$, the required memory block for clock value $k+1$. At clock value $n$ the input and memory are $p^{\otimes n}$. The block permutation gives $\omega_n$; its remaining prefix is $\omega_{n-1}$, the required block at clock value $1$. Thus the entire memory returns exactly after averaging the equally weighted clock branches.
+
+The released states in the different branches are the marginals on cells $1,\ldots,n$ of $\omega_n$, each appearing once. They need not be equal. Their average is precisely $q_n$ in~\eqref{eq:blockentropy}. Hence the circuit has the required output marginal.
+
+The block permutation acts within exact energy shells. Cell permutations conserve energy because all cells have the same spectrum. The clock is degenerate. The controlled block gate is a permutation on the full clock--cell alphabet, as are the rearrangement and clock advance. The full circuit is therefore one finite energy-preserving permutation unitary, not a collection of independently chosen branch maps.
+
+For the seven-level example take $p=\delta_1$ and let $u$ be uniform on levels $0,1,2$. Transpose $(1,1,1)$ and $(0,1,2)$ on three cells, fixing every other triple. The two configurations have energy three, and the average output marginal is $u$. Equation~\eqref{eq:catalyst} becomes
+\begin{equation}
+ c_3=\tfrac13\bigl[\delta_{(0,1,1)}+\delta_{(1,0,2)}+\delta_{(1,1,3)}\bigr],
+ \label{eq:smallclock}
+\end{equation}
+where the final coordinate is the clock. Write a configuration as $(s,a,b,k)$, with $s,a,b\in\{0,\ldots,6\}$ and $k\in\{1,2,3\}$. At $k=3$ first transpose the triples $(1,1,1)$ and $(0,1,2)$; at other clock values skip this step. Write the resulting triple as $(s',a',b')$. Send it to $(b',s',a',k+1)$, with the clock interpreted cyclically. This specifies the map on all $1029$ configurations. The transposition and rotation are bijections preserving $s+a+b$. On the three promised memory configurations, the transitions are
+\[
+\begin{aligned}
+ (1,0,1,1)&\longmapsto(1,1,0,2),\\
+ (1,1,0,2)&\longmapsto(0,1,1,3),\\
+ (1,1,1,3)&\longmapsto(2,0,1,1).
+\end{aligned}
+\]
+Their equal mixture returns $c_3$ and gives output $u$. The joint output has entropy $\log3$, as does the memory, so their mutual information is $\log3$.
+
+\subsection{Correlations and indefinite use}
+For any permitted circuit with input $p\otimes c$ and exact marginal return, permutation invariance gives $\HH(r_{MC})=\HH(p)+\HH(c)$. Substituting into the definition~\eqref{eq:subadd} proves
+\begin{equation}
+ \II(M:C)=\HH(r_M)-\HH(p).
+ \label{eq:mutual}
+\end{equation}
+This establishes the exact correlation cost. In particular, the limiting correlation cost for the approximate conversion is $\HH(q)-\HH(p)$, not an independently adjustable error.
+
+After any number of visits, the memory may be correlated with previous outputs, but its marginal is still $c_n$. The next fresh input has joint state $p\otimes c_n$ with the memory. Applying the same circuit therefore gives the same next output marginal and restores $c_n$. Induction proves the statement for every finite number of visits using one fixed apparatus at the chosen accuracy.
+
+There is no conflict with global entropy conservation. On $N$ independent inputs the full circuit is again a permutation, so the joint entropy of all released cells and the final memory is $N\HH(p)+\HH(c_n)$. The sum of their individual entropies is $N\HH(q_n)+\HH(c_n)$. Their difference, the total correlation, is exactly $N[\HH(q_n)-\HH(p)]$. A promise of independent outputs would be a different task.
+
+An imperfect initial preparation does not create secular growth of the marginal error. If the initial memory is within $\delta$ of $c_n$, the induced memory channel is a stochastic contraction and has stationary state $c_n$. At every visit the memory remains within $\delta$, and the released state remains within $\delta$ of the ideal $q_n$. Contraction follows from
+$\sum_i|\sum_j D_{ij}x_j|\le\sum_j|x_j|\sum_iD_{ij}=\sum_j|x_j|$.
+This observation concerns preparation error; it does not postulate a bound on unspecified errors in the microscopic gate law.
+
+\subsection{Removing strictness and full support}
+For an interior mean energy $\mu$, there is a unique Gibbs state $g_\mu$ with that mean, allowing a real parameter of either sign in this auxiliary construction. Indeed $dU/d\beta=-\Var(e)<0$ for a nonconstant spectrum, and the limits as $\beta\to\pm\infty$ are the minimum and maximum energies. Expanding relative entropy gives, for every $r$ of mean $\mu$,
+\begin{equation}
+ \HH(g_\mu)-\HH(r)=\DD(r\Vert g_\mu)\ge0,
+ \label{eq:gibbsmax}
+\end{equation}
+with equality only for $r=g_\mu$. The Gibbs state is full support.
+
+Assume $U(p)=U(q)=\mu$ and $\HH(p)\le\HH(q)$. If $q\ne g_\mu$, put
+$q_t=(1-t)q+t g_\mu$ with $t>0$. It has the same mean, full support, and entropy strictly larger than $\HH(q)$. Strict concavity gives the last assertion, also when $\HH(q)=\HH(p)$. Lemma~\ref{lem:block} and the clock circuit apply to $p,q_t$. Choose $t$ small and then $n$ large. The output tends to $q$, and its output--memory mutual information tends to $\HH(q)-\HH(p)$. If $q=g_\mu$ and the entropy inequality is strict, the block lemma applies directly. If equality holds,~\eqref{eq:gibbsmax} implies $p=q$, and the identity suffices.
+
+At an extremal mean energy, both states are supported on the corresponding extremal eigenspace: the nonnegative random variable $e-e_{\min}$, or $e_{\max}-e$, has zero mean. Restrict the construction to that eigenspace and extend every gate by the identity elsewhere. The spectrum there is constant. Mixing toward the uniform distribution on that eigenspace gives the same full-support and strict-entropy argument. A constant spectrum on the entire system is handled in exactly this way. These cases complete sufficiency, and hence the proof of Lemma~\ref{thm:closed}.
+
+\section{Bounded work calibration and the adiabatic criterion}\label{app:calibration}
+We prove~\eqref{eq:adiabaticcriterion} without introducing any irrational microscopic energy gaps.
+
+\subsection{Necessity}
+Let a realization of~\eqref{eq:adiabaticdefinition} have memory $C$ with state $c$. Apply~\eqref{eq:necessity} to the fixed input $p\otimes\delta_i$ of $M B_\eps$; the result is
+\[
+ \HH(r_{M B_\eps})\ge\HH(p).
+\]
+If the battery dimension is bounded by $D$, pad all system--battery probability vectors with zeros to length $dD$. Entropy is uniformly continuous on that simplex. As the output approaches $q\otimes\delta_j$, its entropy therefore approaches $\HH(q)$, even if the label $j$ and spectrum vary with accuracy. It follows that $\HH(q)\ge\HH(p)$.
+
+The bounded energy range has a separate role. Exact memory return gives
+$U(r_{M B_\eps})=U(p)+e_i$. Since the output error is at most $\eps$, subtracting the target mean changes the energy by at most $\eps$ times the energy range of $M B_\eps$. Hence the calibrated work $e_j-e_i$ tends to $U(p)-U(q)$. A large-energy rare tail cannot supply an unrecorded finite work amount.
+
+\subsection{Sufficiency}
+Suppose $\HH(p)\le\HH(q)$ and set $\Delta=U(p)-U(q)$. First suppose $\Delta\ne0$. Consider a nine-level battery with levels $0,g,\ldots,8g$. If $\Delta>0$, take input level $i=2$ and output level $j=3$; if $\Delta<0$, take $i=3$ and $j=2$. At the provisional real gap $g_0=|\Delta|$, the states
+\[
+ p_B=p\otimes\delta_i,
+ \qquad q_B=q\otimes\delta_j
+\]
+have equal mean energy $\mu_0$. This provisional spectrum is used only in the following continuity argument, not as an allowed physical system.
+
+The mean $\mu_0$ is strictly between the minimum and maximum total energies, because the battery levels are internal. Let $G$ be the full-support Gibbs state on the system--battery alphabet at that mean, allowing either sign of its parameter. The state $q_B$ is not $G$, since its battery coordinate is sharp. For any sufficiently small $\lambda>0$,
+\[
+ q_{B,\lambda}=(1-\lambda)q_B+\lambda G
+\]
+is full support, has mean $\mu_0$, and satisfies
+$\HH(q_{B,\lambda})>\HH(q_B)\ge\HH(p_B)=\HH(p)$.
+It is also arbitrarily close to $q_B$ as $\lambda\to0$.
+
+Fix such a $\lambda$. When the gap changes from $g_0$ to a nearby $g>0$, the mean energies of both $p_B$ and $q_{B,\lambda}$ vary continuously. Their mismatch is $O(|g-g_0|)$. Choose two total configurations whose energies are different at $g_0$. Transfer a small probability between them in $q_{B,\lambda}$ to remove that mismatch exactly. The required transfer is the energy mismatch divided by their energy difference, so it tends to zero as $g\to g_0$. Since $q_{B,\lambda}$ is full support, the adjusted state $\widetilde q_{B,\lambda,g}$ remains a probability vector for sufficiently close $g$. By entropy continuity it still satisfies
+\[
+ U_g(\widetilde q_{B,\lambda,g})=U_g(p_B),
+ \qquad \HH(\widetilde q_{B,\lambda,g})>\HH(p).
+\]
+Choose such a $g$ rational. The Hamiltonian of $M B_g$ is now rational, so Lemma~\ref{thm:closed} applies to $p_B$ and $\widetilde q_{B,\lambda,g}$. Make its output close enough to that state. Taking $\lambda$ small first, then $g$ close to $g_0$, and then the circuit accuracy small, gives~\eqref{eq:adiabaticdefinition} for any requested error. The battery always has nine levels. Choosing $g$ in a fixed compact neighbourhood of $g_0$ bounds its capacity independently of accuracy.
+
+If $\Delta=0$, take $g=1$ and $i=j=2$. The input and target already have the same mean energy. Lemma~\ref{thm:closed} applies directly, including its equality cases. This completes the proof of~\eqref{eq:adiabaticcriterion}.
+
+
+The work span can be bounded using only the pair's energy difference. For $\Delta\ne0$, take the rational gap above in $|g-|\Delta||<\min\{|\Delta|/2,1\}$. Then the nine-level span is $8g\le8|\Delta|+8$. For $\Delta=0$ take gap one and an unchanged internal level. Thus one may use calibration bound
+\begin{equation}
+ K_\Delta=\max\{9,\lceil8|\Delta|+8\rceil\}.
+ \label{eq:uniformmaxgate}
+\end{equation}
+This bounds the work store, not the block size or memory. The flag has the same input and output mean energy, so $\Delta$ is independent of $t$ in the lifted task. Equation~\eqref{eq:uniformmaxgate} therefore verifies the right side of~\eqref{eq:criterion} in the completion.

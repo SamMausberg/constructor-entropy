@@ -1,0 +1,307 @@
+\documentclass[11pt]{iopjournal}
+\setlength{\voffset}{0pt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[left=28.5mm,right=28.5mm,top=26mm,bottom=25mm,headheight=14pt,headsep=7mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{ragged2e}
+\usepackage{tikz,pgfplots,quantikz}
+\usetikzlibrary{arrows.meta,positioning,calc,fit}
+\pgfplotsset{compat=1.18}
+\makeatletter
+\long\def\@makecaption#1#2{\vskip\abovecaptionskip
+  \begingroup\small\justifying\noindent\textbf{#1.} #2\par\endgroup
+  \vskip\belowcaptionskip}
+\makeatother
+\usepackage{bookmark}
+\usepackage{enumitem}
+\usepackage{needspace,flafter}
+\setlist{nosep,leftmargin=*}
+\setlength{\parindent}{15pt}
+\setlength{\parskip}{2pt}
+\setlength{\emergencystretch}{1.7em}
+\allowdisplaybreaks[1]
+\fancyhfoffset[L]{0pt}
+\fancyhead[L]{\small\itshape Comparison and constructor entropy}
+\fancyhead[R]{\small S. Mausberg}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\articletype}[1]{\noindent{\small\sffamily Journal of Physics A: Mathematical and Theoretical}\par\vspace{9pt}\noindent{\footnotesize\sffamily #1}\par\vspace{8pt}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newcommand{\plain}{\rightsquigarrow}
+\newcommand{\ad}{\preccurlyeq}
+\newcommand{\tv}{d_{\mathrm{TV}}}
+\newcommand{\HH}{\mathrm H}
+\newcommand{\DD}{\mathrm D}
+\newcommand{\II}{\mathrm I}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\calK}{\operatorname{cal}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\eps}{\varepsilon}
+\providecommand{\ket}[1]{|#1\rangle}
+\providecommand{\bra}[1]{\langle#1|}
+\renewcommand{\proj}[1]{|#1\rangle\langle#1|}
+\input{figures/example_values.tex}
+\hypersetup{hidelinks,pdftitle={Comparison, coherence and the stability of constructor entropy},pdfauthor={Samuel Mausberg},pdfsubject={Constructor thermodynamics; correlated catalysis; work calibration}}
+\begin{document}
+\thispagestyle{plain}
+\articletype{Research manuscript}
+\title{Comparison, coherence and the stability of constructor entropy}
+\author{Samuel Mausberg}\par
+\affil{Independent Researcher}\par\vspace{5pt}
+\keywords{constructor thermodynamics, entropy, correlated catalysis, quantum coherence}
+\begin{abstract}
+Do work and heat requirements force a real additive entropy, or merely admit a model with one? We study this distinction for finite reversible realizations with sharp work stores and exact return of the machine's marginal. Comparison fixes every strict entropy increase. We prove that the remaining obstruction is equivalent to divergent work calibration when a two-cell flag approaches a pure state. We also construct a quantum completion containing entangled states within fixed-energy sectors, and prove that its adiabatic order is von Neumann entropy. In contrast, admitting nonstationary states in a convex domain destroys comparison, by the no-broadcasting theorem for coherence. The results separate an explicit consistency theorem from the unresolved necessity of uniform calibration. All work and heat clauses are checked on the completion, with their source locators and operational repairs stated.
+\end{abstract}
+\justifying
+
+\section{Introduction}
+Can a machine's possible tasks determine a single entropy? An explicit model can answer this question for its own dynamics without answering it for every dynamics compatible with the same work and heat requirements. That distinction matters in constructor thermodynamics: the choice of allowed gates and the accuracy convention can carry assumptions not contained in Kelvin's prohibition. Here the general necessity question is reduced to a precise uniformity condition in finite reversible realizations. A quantum completion satisfies that condition, while a larger domain with coherence between different energies fails comparison rather than providing a non-scalar thermodynamics.
+
+The reduction has a physical test. Take two seven-level work cells in a known configuration. Randomize only whether their positions are exchanged, with probability $t$. This costs no energy and returns a finite control marginal exactly. When $t>0$, comparison makes this arbitrarily small entropy increase sufficient to accompany any entropy-neutral pair task. Theorem~\ref{thm:calibrationtest} proves that the original task is possible exactly when the required work calibration stays bounded along some sequence $t\to0$. The issue is the work store, not a bound on the machine's memory.
+
+The construction in Theorem~\ref{thm:quantum} allows all energy-preserving unitaries on states commuting with total energy. These states need not be diagonal in a fixed product basis. The same two work cells have entangled states that can be prepared reversibly. Nevertheless, their complete adiabatic order is von Neumann entropy. Theorem~\ref{thm:domain} then shows that this stationary domain is maximal among convex domains containing a sharp energy state and the maximally mixed state, if exact finite-memory return and comparison are retained.
+
+The representation theory is established work. Lieb and Yngvason derive cancellation from stability, and Fritz characterizes real additive representations of ordered commutative monoids~\cite[Sec.~II.C]{LY}\cite[Theorem~9.4]{Fritz}. Those results do not specify microscopic gates. At the microscopic level, Brand\~ao and collaborators identify the constraints associated with uncorrelated thermal catalysts~\cite{Brandao}; M\"uller studies correlating thermal machines~\cite{Mueller}. Boes, Eisert, Gallego, M\"uller and Wilming connect entropy with unitary catalysis and formulate the catalytic entropy conjecture~\cite{Boes}. Wilming proves its approximate and exact forms~\cite{Wilming2021,Wilming2022}. The catalytic mechanism and the stationary-clock method used below belong to this literature. The bath-free energy--entropy classification of Sparaciari, Oppenheim and Fritz uses a sublinear discarded auxiliary~\cite{Sparaciari}. Our construction adds exact energy-shell accounting and checks the constructor work and heat requirements; it is not a new general catalytic entropy theorem.
+
+\section{Tasks, work calibration and the repaired clauses}\label{sec:formulation}
+We separate an operational contract from a choice of microscopic dynamics. A finite quantum system $M$ has Hamiltonian $H_M$ with rational eigenvalues in one fixed energy unit. A classical realization restricts to diagonal states and permutation matrices. A quantum realization may have a specified subset of density operators as its thermodynamic state domain. Independent systems compose by tensor product, and their Hamiltonians add. Every individual system has bounded energy.
+
+A realization specifies its allowed unitary gates, each commuting with total energy. Inverses, independent parallel gates and finite compositions are allowed. Not every energy-preserving unitary is assumed available. This last distinction separates the model-independent statements from the maximal-gate completion in Sec.~\ref{sec:quantum}.
+
+Write $d(\rho,\tau)=\tfrac12\|\rho-\tau\|_1$ for trace distance. The dimensionless entropy is
+\begin{equation}
+ s(\rho)=-\Tr(\rho\log\rho),\qquad U(\rho)=\Tr(\rho H_M),
+ \label{eq:quantUH}
+\end{equation}
+with natural logarithms. On diagonal states $s$ is Shannon entropy, denoted $\HH$ in the classical construction. These functions are calculated from the microscopic states; no numerical entropy label is an operational axiom.
+
+A closed pair task $\rho\plain\tau$ is possible when, for every $\eps>0$, a finite memory $C$, state $c$, and allowed circuit $V$ give
+\begin{equation}
+ R=V(\rho\otimes c)V^\dagger,\qquad R_C=c,\qquad d(R_M,\tau)<\eps.
+ \label{eq:return}
+\end{equation}
+The entire memory marginal returns exactly, including its internal correlations. The memory may become correlated with released outputs. Each new input is independent of the memory and of earlier outputs. Tracing out the history before a visit reduces it to~\eqref{eq:return}, so the same device gives the same marginal performance at every visit. Memory size may increase with accuracy.
+
+Work is a designated list of known pure configurations on an equally spaced finite ladder. The promised input and output levels have guard levels on both sides. A work list may be embedded in a larger finite substrate; appending a fixed known pure spectator preserves such a list. Let $w_i$ denote the projector onto a promised work level. Adiabatic possibility $\rho\ad\tau$ requires circuits with exact whole-memory return and
+\begin{equation}
+ d(R_{MB_\eps},\tau\otimes w_{j_\eps})<\eps,
+ \qquad R_{MB_\eps C}=V_\eps(\rho\otimes w_{i_\eps}\otimes c_\eps)V_\eps^\dagger.
+ \label{eq:adiabaticdefinition}
+\end{equation}
+There must be a bound on both $\dim B_\eps$ and its energy span, uniform in $\eps$ for this pair task. The bound need not be shared by nearby tasks. Spectra and calibrated gaps may vary with accuracy.
+
+The repaired thermodynamic clauses require serial and parallel composition of pair tasks, comparison on every finite composite, sharp work swaps and work interoperability, information operations, heat families on a declared working interval, the zeroth law on that interval, and Kelvin's prohibition. Heat is not an unspecified bath: it is a designated family on one of these finite substrates. Appendix~\ref{app:clauses} gives each clause, its locator in Marletto's arXiv version~\cite{Marletto}, and the reason for each repair. In particular, equal-energy work attributes may share a heat counterpart. No additive entropy label and no unproved transitivity of adiabatic is-like are included.
+
+\section{The entropy-neutral obstruction}\label{sec:calibration}
+A general statement is needed before a model with unrestricted control is introduced. Exact marginal return supplies the following bound for every gate class in Sec.~\ref{sec:formulation}:
+\begin{equation}
+ \rho\ad\tau\quad\Longrightarrow\quad s(\rho)\le s(\tau).
+ \label{eq:monotone}
+\end{equation}
+Indeed, unitary invariance and subadditivity give
+$s(R_{MB})\ge s(\rho)$ because the input work state is pure and $R_C=c$. Bounded work dimension makes entropy continuity uniform as the output approaches $\tau\otimes w_j$. Comparison therefore implies
+\begin{equation}
+ s(\rho)<s(\tau)\quad\Longrightarrow\quad\rho\ad\tau.
+ \label{eq:strictcomparison}
+\end{equation}
+Only equality remains undecided. Appendix~\ref{app:bounds} gives the details without bounding the memory.
+
+Our running example turns equality into a calibration experiment. The two cells have energies $0,1,\ldots,6$. On their 49-dimensional composite $F$, put
+\begin{equation}
+ x=\proj{2,3},\qquad y=\proj{3,2},\qquad
+ \omega_t=(1-t)x+t y,\quad 0<t\le\tfrac12.
+ \label{eq:flag}
+\end{equation}
+Both configurations have energy five. A degenerate classical control in state $(1-t,t)$ controls their physical interchange. The control returns exactly, while the output is $\omega_t$ and its entropy is
+$h_2(t)=-t\log t-(1-t)\log(1-t)>0$.
+This is one explicitly required reference gate in the next theorem. Its availability is not inferred from the separate possibility of its two branches. The maximal classical and quantum completions both contain it.
+
+\begin{figure}[tb]
+\centering
+\begin{tikzpicture}[>=Stealth,font=\small,box/.style={draw,rounded corners,align=center,minimum height=10mm,inner sep=5pt}]
+\node[box] (a) at (0,0) {$\rho\otimes x$};
+\node[box] (b) at (7.6,0) {$\tau\otimes\omega_t$};
+\draw[->,thick] (a)--node[above,align=center] {positive entropy change $h_2(t)$\\comparison gives a task for every $t>0$} (b);
+\node[box] (c) at (0,-2.05) {$\rho$};
+\node[box] (d) at (7.6,-2.05) {$\tau$};
+\draw[->] (a)--node[left,align=right] {regard $F$ as\\part of the work store} (c);
+\draw[->] (b)--node[right,align=left] {$d(\omega_t,x)=t$\\send $t\to0$} (d);
+\draw[->,thick] (c)--node[above,align=center] {valid precisely when work bounds\\stay finite along a sequence} (d);
+\end{tikzpicture}
+\caption{The calibration test for $s(\rho)=s(\tau)$. The upper task exists at every positive $t$, but its work bound may depend on $t$. A common bound lets the flag be absorbed into a bounded work substrate, proving the lower task. The diagram is an implication with a uniformity condition, not an interchange of two limits.}
+\label{fig:flagtest}
+\end{figure}
+
+Measure energy spans in the fixed cell energy unit and define
+\[
+ \calK(B)=\max\{\dim B,\lceil e_{\max}(B)-e_{\min}(B)\rceil\}.
+\]
+For an entropy-neutral ordered pair $(\rho,\tau)$, let $\kappa_{\rho,\tau}(t)$ be the smallest integer bounding $\calK(B_\eps)$ in a realization, at every accuracy, of
+\begin{equation}
+ \rho\otimes x\ad\tau\otimes\omega_t.
+ \label{eq:lift}
+\end{equation}
+This integer is finite by~\eqref{eq:strictcomparison}. Constructor memories are not included in it.
+
+\Needspace{13\baselineskip}
+\begin{theorem}[Calibration criterion]\label{thm:calibrationtest}
+Consider a finite reversible realization of the repaired pair-task clauses that admits the states and the controlled interchange in~\eqref{eq:flag}. For every $s(\rho)=s(\tau)$,
+\begin{equation}
+ \rho\ad\tau\quad\Longleftrightarrow\quad
+ \liminf_{t\downarrow0}\kappa_{\rho,\tau}(t)<\infty.
+ \label{eq:criterion}
+\end{equation}
+A bound $K$ on a sequence of lifted tasks gives a bound $49K$ on the original task. A complete real additive entropy exists on this realization if and only if~\eqref{eq:criterion}'s right-hand condition holds for every entropy-neutral ordered pair. In that case $s$ itself is a complete additive entropy. Otherwise there is an entropy-neutral strictly irreversible task, and finite compensation fails.
+\end{theorem}
+
+The proof does not make the catalyst small. If the original task is possible, append the independent flag gate; its finite control returns exactly and the work bound is unchanged. Conversely, suppose lifted tasks exist along $t_n\to0$ with bound $K$. Use error $\eps_n\to0$ for each. Regard $B_n\otimes F$ as the work substrate, with the embedded ladder $w_j\otimes x$. The output is within $\eps_n+t_n$ of $\tau\otimes w_j\otimes x$, and the original whole memory still returns exactly. Its dimension is at most $49K$ and its energy span is at most $K+12\le49K$. This proves~\eqref{eq:criterion}.
+
+To see why a different numerical entropy cannot rescue a failure, suppose $A=(\rho,\tau)$ is strictly irreversible but $s(\rho)=s(\tau)$. The flag task $B=(x,\omega_{1/2})$ is strictly irreversible with positive $s$-change. Every $nA\otimes\widetilde B$ lowers $s$ and is forbidden. A complete additive real label would assign positive changes to both $A$ and $B$, and would allow that task for large enough $n$. This contradiction proves the final assertion. Appendix~\ref{app:stability} supplies the remaining equivalences, including fixed-collateral stability.
+
+The theorem identifies what an independence model would have to realize physically: one forbidden entropy-neutral direction with work calibration diverging for every vanishing-noise sequence. Merely choosing a second ordering coordinate is not a construction of those machines or their calibration costs.
+
+\section{A quantum completion with scalar entropy}\label{sec:quantum}
+A consistency model is needed to show that the operational clauses and the calibration condition can hold together. Specify the admissible states on every finite composite by
+\begin{equation}
+ [\rho,H_M]=0,
+ \label{eq:stationary}
+\end{equation}
+and allow every unitary commuting with total energy. All Hamiltonians still have finite rational spectra. Memories obey the same state rule and exact-return contract. This is a choice of subsidiary dynamics, not a consequence of comparison.
+
+The state rule permits genuine quantum states. On the same two cells as~\eqref{eq:flag}, the vector
+\begin{equation}
+ \ket{\psi}=\frac{\ket{2,3}+\ket{3,2}}{\sqrt2}
+ \label{eq:entangled}
+\end{equation}
+has definite total energy five and is entangled between the cells. A Hadamard matrix on the span of those two configurations, extended by the identity elsewhere, maps $x$ to $\proj{\psi}$ reversibly and conserves energy exactly. A controlled relative phase with a uniform degenerate bit converts $\proj{\psi}$ to $\omega_{1/2}$ while returning the bit marginal. Thus the completion is not confined to density operators diagonal in one product basis.
+
+\Needspace{13\baselineskip}
+\begin{theorem}[Stationary quantum completion]\label{thm:quantum}\label{thm:consistency}
+The preceding finite-dimensional dynamics satisfies all repaired clauses stated in Appendix~\ref{app:clauses}. On every finite composite its closed and adiabatic pair-task orders are
+\begin{align}
+ \rho\plain\tau
+ &\quad\Longleftrightarrow\quad U(\rho)=U(\tau),\quad s(\rho)\le s(\tau),
+ \label{eq:qclosed}\\
+ \rho\ad\tau
+ &\quad\Longleftrightarrow\quad s(\rho)\le s(\tau).
+ \label{eq:adiabaticcriterion}
+\end{align}
+At each fixed accuracy a finite device works at every fresh visit. Nine work levels suffice in~\eqref{eq:adiabaticcriterion}. For fixed input and target energies, their energy span can be bounded independently of the flag parameter $t$. Consequently the condition in Theorem~\ref{thm:calibrationtest} holds, and $S=k_{\rm B}s$ is complete and additive.
+\end{theorem}
+
+The sufficiency argument has two separate ingredients. First, stationary states can be diagonalized by unitaries acting within energy eigenspaces. Second, for diagonal input and target, an exact-energy-shell permutation moves typical input words into target type classes. A finite stationary clock converts that block transformation into a one-input device with exact whole-memory return. The output may be correlated with the memory and earlier outputs. Its entropy increase is exactly the output--memory mutual information. The construction and its equality cases are proved in Appendices~\ref{app:typical}--\ref{app:calibration}; Appendix~\ref{app:quantumproof} gives the quantum reduction.
+
+The reference work and heat media are concrete. For the seven-level work ladder, a finite permutation implements each adjacent swap on both promised inputs with a single initialized replica. For $1\le j\le5$, its specified branches are
+\begin{equation}
+ (j,j)\mapsto(j+1,j-1),\qquad
+ (j+1,j)\mapsto(j,j+1).
+ \label{eq:workswap}
+\end{equation}
+For the bottom pair initialize the replica at level one and use
+$(0,1)\mapsto(1,0)$ and $(1,1)\mapsto(0,2)$.
+Within each energy shell these prescribed injections extend to permutations. Appendix~\ref{app:media} verifies the source's work tests and interoperability, including upper and lower guard cases.
+
+For a nonconstant finite spectrum define the positive-temperature heat family
+\begin{equation}
+ \gamma_\beta=Z(\beta)^{-1}e^{-\beta H_M},\qquad \beta>0.
+ \label{eq:gibbs}
+\end{equation}
+Its working interval is
+\begin{equation}
+ e_{\min}<U<\overline e,\qquad \overline e=\Tr(H_M)/\dim M.
+ \label{eq:interval}
+\end{equation}
+The finite partition function gives
+\begin{equation}
+ \frac{dU}{d\beta}=-\Var_{\gamma_\beta}(H_M),\qquad
+ \frac{ds(\gamma_\beta)}{dU}=\beta.
+ \label{eq:derivatives}
+\end{equation}
+Every member is full rank and cannot be perfectly distinguished from any other supplied state. Entropy strictly orders the family and its identical-copy family. Two members have a unique equalized member satisfying
+\begin{equation}
+ 2s(\gamma_{\beta_F})=s(\gamma_{\beta_1})+s(\gamma_{\beta_2}).
+ \label{eq:equalization}
+\end{equation}
+Equation~\eqref{eq:adiabaticcriterion} makes equalization reversible with calibrated work.
+
+The same family proves the zeroth law and Kelvin's prohibition. Quantum relative entropy gives, for every state $r$,
+\begin{equation}
+ \DD(r\Vert\gamma_\beta)
+ =s(\gamma_\beta)-s(r)+\beta[U(r)-U(\gamma_\beta)]\ge0.
+ \label{eq:kelvin}
+\end{equation}
+At the same energy the Gibbs state maximizes entropy, so~\eqref{eq:qclosed} permits every eligible state to reach it. If a positive-temperature heat state supplied positive sharp work, its final entropy could not fall, while~\eqref{eq:kelvin} would require the opposite. A heat attribute therefore cannot supply the upward branch of a work swap. Heat-to-sharp-work conversion is separately excluded by its entropy decrease. These are checks of the claimed media, not definitions of their task order.
+
+The same cells form a two-input engine. At $\beta_1=\log2$ and $\beta_2=\log4$,
+\begin{align}
+ \beta_F&=0.987134062947\ldots,&
+ U(\gamma_{\beta_F})&=0.586997378782\ldots,\notag\\
+ W&=U(\gamma_{\beta_1})+U(\gamma_{\beta_2})-2U(\gamma_{\beta_F})
+   =0.103793193360\ldots .
+ \label{eq:workengine}
+\end{align}
+All energies use the cell's level spacing as unit. Expanding relative entropy and using~\eqref{eq:equalization} yields
+\begin{equation}
+ \beta_F W=\DD(\gamma_{\beta_1}\otimes\gamma_{\beta_2}
+       \Vert\gamma_{\beta_F}\otimes\gamma_{\beta_F})>0.
+ \label{eq:engineKL}
+\end{equation}
+The source code evaluates the finite sums directly. Figure~\ref{fig:engine} displays the work at unchanged total entropy.
+\input{figures/engine.tex}
+
+\section{Which coherence is compatible with comparison?}\label{sec:coherence}
+Coherence within an energy eigenspace is different from coherence between different energies. The preceding entangled example is stationary. A nonstationary target rotates under free time evolution and requires a time reference. Exact finite-memory return constrains that reference even when correlations are allowed.
+
+The required prior result is the no-broadcasting theorem for asymmetry, proved by Lostaglio and M\"uller and independently by Marvian and Spekkens~\cite{LostaglioMueller,MarvianSpekkens}. A time-covariant operation cannot turn a stationary supplied system into a nonstationary one while returning a finite reference marginal exactly. The reference itself may initially be coherent. Appendix~\ref{app:coherenceproof} states the theorem precisely and reproduces its reduction to the finite no-information-without-disturbance structure.
+
+\Needspace{13\baselineskip}
+\begin{theorem}[Maximal stationary state domain]\label{thm:domain}
+Let a finite quantum realization satisfy energy-conserving unitary dynamics, exact whole-memory return, bounded work calibration and comparison. Suppose its admissible domain on $M$ is convex and contains the maximally mixed state and a pure energy eigenstate. Then every admissible state on $M$ commutes with $H_M$.
+
+For a two-level sector with distinct energies, let $g$ be a pure energy state and
+\begin{equation}
+ \rho_\chi=\tfrac12
+ \begin{pmatrix}1&\chi\\\chi&1\end{pmatrix},\qquad 0<\chi<1.
+ \label{eq:coherentqubit}
+\end{equation}
+Neither adiabatic direction between $g$ and $\rho_\chi$ is possible. Every output supplied from $g$ under the return contract has distance at least $\chi/2$ from $\rho_\chi$.
+\end{theorem}
+
+For the forward direction, the supplied system and sharp work input are stationary. Treat them together and apply no broadcasting with the whole memory as reference. The system output is stationary at every accuracy, irrespective of the reference's dimension or the amount of work. For the reverse direction, $s(\rho_\chi)>0=s(g)$, so~\eqref{eq:monotone} forbids the task. A stationary qubit is diagonal; minimizing its trace distance from~\eqref{eq:coherentqubit} gives $\chi/2$.
+
+For a general nonstationary admissible state $\rho$, mix it with a positive amount of the maximally mixed state. Convexity makes the result admissible, full rank and still nonstationary. Its entropy is positive. It cannot reach a pure energy state by~\eqref{eq:monotone}, and the pure state cannot reach it by no broadcasting. This contradicts comparison and proves the first statement.
+
+Thus a convex enlargement of the stationary completion by energy coherence does not give the requested alternative thermodynamics. It loses one of the same operational clauses. The conclusion uses no extra conserved charge: time covariance follows from the single energy conservation law.
+
+\section{Discussion}\label{sec:discussion}
+The distinction between consistency and necessity is now localized. The full-unitary stationary completion proves consistency and a scalar order, including for entangled states of a finite composite. It does not establish that every restricted gate class has that order. For finite reversible realizations containing the explicit flag gate, an entropy-neutral irreversible task is equivalent to failure of finite compensation, and its forbidden direction is diagnosed exactly by divergent work calibration. The repaired clauses provide a bound for each task, not a common bound for the vanishing-flag family. We have neither derived that additional uniformity from those clauses nor constructed a physically complete realization violating it. The all-model necessity-or-independence question therefore remains open in this paper.
+
+The finite reversible and convex-domain hypotheses in the corresponding theorems are stated assumptions, not consequences of Marletto's source. The completion concerns thermodynamic pair tasks and the displayed information and work gates; it does not claim a composition theorem for all unknown-input catalytic task networks. Repeated use guarantees output marginals, not an independent output history.
+
+It would also be incorrect to replace the missing work bound by a uniform bound on the memory. Entropy-neutral conversion between different spectra can require memory dimension tending to infinity even in the scalar completion. Appendix~\ref{app:bounds} proves this compactness obstruction, consistent with the catalytic-entropy literature~\cite{Boes,Wilming2021,Wilming2022}. Keeping the work bound uniform is compatible with that divergence.
+
+Exact product return would be a different physical contract. If the final output and memory had to be independent, unitary entropy balance would force equality of input and output entropies, even under bounded work calibration. On the seven-level cell, neither direction between level one and the uniform distribution on levels zero, one and two would then be possible. Appendix~\ref{app:product} gives the proof and a 1029-configuration marginal-return circuit that permits the entropy-increasing direction under the present contract.
+
+The remaining choices have separate operational roles. Sharp work prevents an unrecorded entropy sink. The thermal interval avoids demanding full-rank heat states at extremal energies. Bounded calibration prevents a vanishing work error from hiding finite entropy or energy in a growing tail. Exact marginal return permits reusable finite memory without requiring uncorrelated outputs. None of these conventions should be confused with an assumed numerical entropy label.
+
+\data{The LaTeX source includes finite work-swap and stationary-memory checks, exact controlled-interchange checks, a quantum-gate check and the finite Gibbs-sum data used in the figure. The numerical engine calculation is not used as a proof of an asymptotic conversion theorem.}
+\ack{OpenAI's GPT-6 Astra Pro assisted with literature checking, mathematical development, code and manuscript preparation.}
+
+\appendix
+\input{axioms.tex}
+\input{new_proofs.tex}
+\input{classical_proofs.tex}
+\input{quantum_checks.tex}
+\input{references.tex}
+\end{document}
