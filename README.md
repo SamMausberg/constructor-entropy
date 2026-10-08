@@ -5,24 +5,28 @@ manuscript, released with its calculations and supporting material.
 
 ## Release and verification
 
-The final PDF was supplied separately from the source bundle. The bundled
-LaTeX is an earlier revision: rebuilding it produces `manuscript.pdf`,
-not the final manuscript above. The final PDF is preserved byte for byte.
+The LaTeX source matches the final manuscript. On October 8, 2026,
+`bash build.sh` passed in a fresh directory using Python 3.12.3 and
+pdfTeX 1.40.25 (TeX Live 2023/Debian). All 25 rebuilt pages match the
+final PDF in extracted text and rendered pixels. The final PDF is preserved
+byte for byte; rebuilt PDF metadata may differ.
 
-On October 4, 2026, `bash build.sh` passed in a fresh validation copy using
-Python 3.12.3 and pdfTeX 1.40.25 (TeX Live 2023/Debian). Both finite checking programs passed, including classical permutations and exact quantum marginal checks.
 The final LaTeX pass had no unresolved references, warnings, or overfull or
-underfull boxes. There are no Lean sources or Lake projects in this bundle.
-These checks concern the supplied source and finite examples; they do not
-verify every argument in the final PDF.
+underfull boxes. Both retained finite checking programs passed. These checks
+support the supplied examples and source reproduction; they do not verify
+every argument in the final PDF. There are no Lean sources or Lake projects.
 
-See [the current validation record](verification/release.json) and
-[execution log](verification/build.log). Earlier build records elsewhere in
-the repository belong to the supplied source bundle.
+See [the current source reproduction record](verification/source-reproduction.json)
+and [current build log](verification/source-reproduction-build.log), with the
+[final LaTeX log](verification/source-reproduction-latex.log).
+The [October 4 validation record](verification/release.json),
+[its execution log](verification/build.log), and earlier records in `checks/`
+and `verification/checks/` describe the earlier source revision. Their
+source/PDF mismatch statements are historical.
 
 Samuel Mausberg, Independent Researcher
 
-Research manuscript in the IOP journal class, prepared for *Journal of Physics A: Mathematical and Theoretical*.
+Research manuscript in a journal-style layout.
 
 ## Scope
 
@@ -40,15 +44,15 @@ bash build.sh
 
 The script runs both finite checking programs, regenerates the Gibbs data, runs pdfLaTeX three times, and writes `manuscript.pdf`. It stops if the final log has unresolved references, LaTeX/package warnings or overfull/underfull boxes.
 
-Requirements: Python 3.10 or later, pdfLaTeX, and the LaTeX packages used in `main.tex`. A reasonably complete TeX Live installation supplies `amsmath`, `amssymb`, `amsthm`, `mathtools`, `lmodern`, `geometry`, `microtype`, `ragged2e`, `tikz`, `pgfplots`, `quantikz`, `bookmark`, `enumitem`, `needspace` and `flafter`. The IOP class is included. The Python checks use only the standard library. No network access or shell escape is needed to build.
+Requirements: Python 3.10 or later, pdfLaTeX, and the LaTeX packages used in `main.tex`. A reasonably complete TeX Live installation supplies `amsmath`, `amssymb`, `amsthm`, `mathtools`, `lmodern`, `geometry`, `microtype`, `graphicx`, `xcolor`, `tikz`, `pgfplots`, `fancyhdr`, `enumitem`, `needspace`, `hyperref`, `cleveref` and `caption`. The current manuscript uses the standard article class. The retained Python checks use only the standard library. No network access or shell escape is needed to build.
 
-The delivered copy was also rebuilt in a fresh directory with no pre-existing auxiliary files. `checks/build_status.json` records the release checks.
+The source was synchronized from the supplied final revision without changing its rendered content. Expanding the five appendix/bibliography inputs recovers that revision exactly. The plot data and numerical macros are embedded in `main.tex`.
 
 ## Source files
 
 `main.tex` contains the main text and the calibration diagram. `axioms.tex` specifies the repaired clauses with locators to arXiv:1608.02625v5. `new_proofs.tex` proves entropy monotonicity, the calibration criterion, its compensation consequences, the memory-size obstruction and the cancellation lemma. `classical_proofs.tex` gives the exact-energy-shell permutation construction, the stationary memory and bounded work calibration. `quantum_checks.tex` gives the quantum reduction, clause-by-clause model checks, the product-return obstruction and the coherence argument. `references.tex` contains the complete bibliography.
 
-The TikZ/pgfplots figures and generated finite Gibbs data are in `figures/`. The clock circuit is written with quantikz in `classical_proofs.tex`.
+The current TikZ/pgfplots figure and its Gibbs data are embedded in `main.tex`. The files in `figures/` are retained supporting material from the earlier source revision and are not inputs to the current manuscript.
 
 ## Finite checks
 
@@ -58,9 +62,9 @@ The TikZ/pgfplots figures and generated finite Gibbs data are in `figures/`. The
 
 The outputs are `checks/results.json` and `checks/quantum_results.json`. These finite tests support the displayed examples. They are not numerical proofs of the all-accuracy conversion theorem and are not a formal proof-assistant verification. The mathematical arguments, including the scope of imported structural theorems, are in the text and appendices.
 
-## Class provenance
+## Retained class provenance
 
-`iopjournal.cls` is the IOP Publishing journal class carrying the 2024/01/31 class identifier and the 2025 copyright notice. It is redistributed unmodified under the LaTeX Project Public License 1.3c or later, as permitted by its header. Journal placeholders and page geometry are overridden in `main.tex`, not in the class.
+`iopjournal.cls` is retained from the earlier source revision and is not used by the current build. It is the IOP Publishing journal class carrying the 2024/01/31 class identifier and the 2025 copyright notice. It is redistributed unmodified under the LaTeX Project Public License 1.3c or later, as permitted by its header. The class file remains unmodified.
 
 The public mirror used to obtain the class was:
 

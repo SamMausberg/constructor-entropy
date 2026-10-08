@@ -1,63 +1,61 @@
-\section{Entropy balance and the two size bounds}\label{app:bounds}
+\section{Entropy balance and the two size bounds}\label{app:entropy}
 \subsection{Finite-dimensional inequalities}
-We record the entropy facts used in the quantum statements. They do not assume any thermodynamic ordering. For density operators $a,b$ with $\supp a\subseteq\supp b$, define
-$\DD(a\Vert b)=\Tr[a(\log a-\log b)]$; otherwise it is infinite.
-Diagonalize $a$ with eigenvalues $\lambda_i$ and $b$ with eigenvalues $\mu_j$. The overlaps $Q_{ij}=|\langle i|j\rangle|^2$ are doubly stochastic. Put $r_i=\sum_j Q_{ij}\mu_j$. Concavity of the logarithm gives
+We record the entropy facts used in the quantum statements. They do not assume any thermodynamic ordering. For density operators $a,b$ with $\supp a\subseteq\supp b$, define $D(a\|b)=\Tr[a(\log a-\log b)]$; otherwise it is infinite. Diagonalize $a$ with eigenvalues $\lambda_i$ and $b$ with eigenvalues $\mu_j$. The overlaps $Q_{ij}=|\langle i|j\rangle|^2$ are doubly stochastic. Put $r_i=\sum_jQ_{ij}\mu_j$. Concavity of the logarithm gives
 \[
- \DD(a\Vert b)\ge\sum_{i:\lambda_i>0}\lambda_i\log\frac{\lambda_i}{r_i}\ge0.
+ D(a\|b)\ge\sum_{i:\lambda_i>0}\lambda_i\log\frac{\lambda_i}{r_i}\ge0.
 \]
 The last inequality follows from $-\log z\ge1-z$ and $\sum_i r_i=1$. Equality requires $r_i=\lambda_i$, together with equality in the logarithmic inequality on the support of $a$. The latter says that every contributing $\mu_j$ for a fixed $i$ has the same value. Thus $b\ket{i}=\lambda_i\ket{i}$ on that support, and its trace leaves no weight outside it. Hence equality holds precisely when $a=b$.
 
 Unitary invariance of $s$ follows from preservation of eigenvalues. The product identity $s(a\otimes b)=s(a)+s(b)$ follows by multiplying eigenvalues. Expanding relative entropy against the product of two marginals gives
 \begin{equation}
- I(A:C)_R:=s(R_A)+s(R_C)-s(R)=\DD(R\Vert R_A\otimes R_C)\ge0,
- \label{eq:qsubadd}
+ I(A:C)_R:=s(R_A)+s(R_C)-s(R)=D(R\|R_A\otimes R_C)\ge0, \label{eq:mutualinfo}
 \end{equation}
 with equality precisely for a product state. The support condition holds because a zero marginal expectation of a positive joint operator annihilates the corresponding joint subspace. Concavity follows from
-$s(\sum_i p_i a_i)-\sum_i p_i s(a_i)=\sum_i p_i\DD(a_i\Vert\sum_jp_j a_j)\ge0$.
+\[
+ s\Bigl(\sum_i p_i a_i\Bigr)-\sum_i p_i s(a_i)
+ =\sum_i p_i D\Bigl(a_i\Big\|\sum_jp_j a_j\Bigr)\ge0.
+\]
 
 On a fixed finite-dimensional state space, entropy is continuous: the ordered eigenvalues vary continuously, by the min--max formula, and $-x\log x$ extends continuously to zero. The state space is compact, so this continuity is uniform. A bounded sequence of dimensions can be embedded with zero eigenvalues in one fixed dimension. The same observation gives uniform continuity for bounded dimensions without any restriction on the memory.
 
-Trace distance contracts under physical channels. Indeed,
-$d(a,b)=\max_{0\le E\le I}\Tr E(a-b)$, and the adjoint of a trace-preserving positive channel takes effects to effects. Tensoring both states with the same density operator leaves their distance unchanged. These facts justify the processing and partial-trace estimates used below.
+Trace distance contracts under physical channels. Indeed, $d(a,b)=\max_{0\le E\le\id}\Tr E(a-b)$, and the adjoint of a trace-preserving positive channel takes effects to effects. Tensoring both states with the same density operator leaves their distance unchanged. These facts justify the processing and partial-trace estimates used below.
 
 \subsection{Monotonicity and calibration}
 For a closed realization, unitary invariance and exact return give
 \[
  s(R_M)+s(c)-s(R)=s(R_M)-s(\rho)\ge0.
 \]
-This is also the exact output--memory mutual information. Energy conservation gives $U(R_M)=U(\rho)$ because the finite memory has exactly its original marginal. Taking the accuracy limit proves the necessary conditions in~\eqref{eq:qclosed}.
+This is also the exact output--memory mutual information. Energy conservation gives $U(R_M)=U(\rho)$ because the finite memory has exactly its original marginal. Taking the accuracy limit proves the necessary conditions in~\eqref{eq:closedorder}.
 
-For~\eqref{eq:adiabaticdefinition}, the initial work state is pure. Equation~\eqref{eq:qsubadd} applied across $MB:C$ therefore gives $s(R_{MB})\ge s(\rho)$. If the work dimension is at most $K$, uniform continuity on dimension $(\dim M)K$ and the pure target work state give
+For~\eqref{eq:adiabatic}, the initial work state is pure. Equation~\eqref{eq:mutualinfo} applied across $MB:C$ therefore gives $s(R_{MB})\ge s(\rho)$. If the work dimension is at most $K$, uniform continuity on dimension $(\dim M)K$ and the pure target work state give
 \[
- s(\tau)=\lim_{\eps\to0}s(R_{MB_\eps})\ge s(\rho).
+ s(\tau)=\lim_{\varepsilon\to0}s(R_{MB_\varepsilon})\ge s(\rho).
 \]
-This proves~\eqref{eq:monotone}. Comparison then proves~\eqref{eq:strictcomparison}: if $s(\rho)<s(\tau)$, the reverse direction is forbidden by monotonicity, so the forward direction must be possible.
+This proves~\eqref{eq:monotonicity}. Comparison then proves~\eqref{eq:strict}: if $s(\rho)<s(\tau)$, the reverse direction is forbidden by monotonicity, so the forward direction must be possible.
 
-The energy bound has a distinct purpose. For a Hermitian operator $H$ with spectral span $L$, the variational characterization of trace distance gives
-$|\Tr H(a-b)|\le Ld(a,b)$, after subtracting its minimum eigenvalue. Thus a uniform work-energy span makes the actual work change converge to the sharp endpoint change and gives
+The energy bound has a distinct purpose. For a Hermitian operator $H$ with spectral span $L$, the variational characterization of trace distance gives $|\Tr H(a-b)|\le Ld(a,b)$, after subtracting its minimum eigenvalue. Thus a uniform work-energy span makes the actual work change converge to the sharp endpoint change and gives
 \[
- (e_{j_\eps}-e_{i_\eps})-[U(\rho)-U(\tau)]\longrightarrow0.
+ (e_{j_\varepsilon}-e_{i_\varepsilon})-[U(\rho)-U(\tau)]\longrightarrow0.
 \]
 A common energy zero is immaterial. An arbitrarily small trace-distance tail cannot conceal a finite energy transfer when the span is bounded.
 
 \subsection{Why the memory need not stay bounded}
-\begin{proposition}\label{prop:memorygrowth}
+\begin{proposition}\label{prop:memory}
 Suppose $s(\rho)=s(\tau)$ but $\rho$ and $\tau$ have different spectra. In any sequence of exact-marginal-return unitary realizations approaching $\tau$, with bounded work dimension, the memory dimension tends to infinity along every improving-accuracy sequence.
 \end{proposition}
 \begin{proof}
 Otherwise take a subsequence with bounded memory dimension. The integer dimensions and the indices of the promised work levels can be made constant by passing to a further subsequence. Identify their Hilbert spaces and bases accordingly. Compactness of the unitary group and of the density-operator space gives $V_n\to V$ and $c_n\to c$ on another subsequence. No claim that $V$ is an allowed gate is needed.
 
-The limiting joint state is $R=V(\rho\otimes w_i\otimes c)V^\dagger$, with $R_{MB}=\tau\otimes w_j$ and $R_C=c$. Its mutual information across $MB:C$ is zero because $s(\rho)=s(\tau)$. Hence~\eqref{eq:qsubadd} implies $R=\tau\otimes w_j\otimes c$. Unitary invariance of every power trace now gives
+The limiting joint state is $R=V(\rho\otimes w_i\otimes c)V^\dagger$, with $R_{MB}=\tau\otimes w_j$ and $R_C=c$. Its mutual information across $MB:C$ is zero because $s(\rho)=s(\tau)$. Hence~\eqref{eq:mutualinfo} implies $R=\tau\otimes w_j\otimes c$. Unitary invariance of every power trace now gives
 \[
  \Tr(\rho^k)\Tr(c^k)=\Tr(\tau^k)\Tr(c^k),\qquad k=1,\ldots,\dim M.
 \]
 Since $\Tr(c^k)>0$, the moments of $\rho$ and $\tau$ agree. Newton's identities determine the characteristic polynomial from these moments, so their spectra agree, a contradiction.
 \end{proof}
-This distinguishes the work bound in Theorem~\ref{thm:calibrationtest} from a bound on all auxiliary size. It is consistent with the unbounded-accuracy catalyst limits in~\cite{Boes,Wilming2021,Wilming2022}.
+This distinguishes the work bound in Theorem~\ref{thm:calibration} from a bound on all auxiliary size. It is consistent with the unbounded-accuracy catalyst limits in~\cite{boes,wilming21,wilming22}.
 
-\section{Calibration, finite compensation and fixed collateral}\label{app:stability}
-Here the hypotheses are those of Theorem~\ref{thm:calibrationtest}. All pair tasks discussed are on fixed finite substrates. We spell out the quantifiers because per-task calibration and uniform calibration across tasks are different statements.
+\section{Calibration, finite compensation and fixed collateral}\label{app:calibration}
+Here the hypotheses are those of Theorem~\ref{thm:calibration}. All pair tasks discussed are on fixed finite substrates. Per-task calibration and uniform calibration across tasks have different quantifiers.
 
 \subsection{The controlled flag and the limiting task}
 Write a basis configuration of the reference apparatus as $(b,a_1,a_2)$, where $b\in\{0,1\}$ has zero energy and $a_1,a_2\in\{0,\ldots,6\}$. The permutation
@@ -65,66 +63,56 @@ Write a basis configuration of the reference apparatus as $(b,a_1,a_2)$, where $
  (0,a_1,a_2)\mapsto(0,a_1,a_2),\qquad
  (1,a_1,a_2)\mapsto(1,a_2,a_1)
 \]
-is an involution on all 98 configurations and preserves $a_1+a_2$. On input $x$ and the control $\eta_t=\operatorname{diag}(1-t,t)$ it gives
+is an involution on all 98 configurations and preserves $a_1+a_2$. On input $x$ and control $\eta_t=\diag(1-t,t)$ it gives
 \[
- (1-t)x\otimes\proj{0}+t y\otimes\proj{1}.
+ (1-t)x\otimes\proj{0}+ty\otimes\proj{1}.
 \]
 Its marginals are $\omega_t$ and $\eta_t$ exactly. Fresh visits keep the control marginal invariant even though the outputs become correlated with its value. The entropy gain is $h_2(t)$, the energy change is zero and $d(\omega_t,x)=t$.
 
-For each fixed $t>0$, comparison and~\eqref{eq:strictcomparison} make the lifted task~\eqref{eq:lift} possible. Its admissible integer calibration bounds form a nonempty subset of $\N$, so their minimum $\kappa_{\rho,\tau}(t)$ exists. This does not assert that the optimizing memory dimension is finite uniformly in accuracy.
+For each fixed $t>0$, comparison and~\eqref{eq:strict} make the lifted task~\eqref{eq:lifted} possible. Its admissible integer calibration bounds form a nonempty subset of $\mathbb N$, so their minimum $\kappa_{\rho,\tau}(t)$ exists. If the original task has bound $K$, tensoring its witnesses with the independent flag circuit returns the entire product memory, keeps the work store unchanged and gives $\kappa_{\rho,\tau}(t)\le K$ for every $t$.
 
-If $\rho\ad\tau$ has calibration bound $K$, tensor its witnesses with the independent flag circuit. Their memories are initially independent and acted upon independently, so the entire joint memory marginal is the product of its returned marginals. The work store is unchanged, and the errors do not increase. Thus $\kappa_{\rho,\tau}(t)\le K$ for all $t$.
-
-Conversely, finite $\liminf_{t\downarrow0}\kappa_{\rho,\tau}(t)$ supplies an integer $K$ and a sequence $t_n\downarrow0$ with $\kappa_{\rho,\tau}(t_n)\le K$. For each $n$ choose a witness of error $\eps_n\downarrow0$. In the same physical circuit reclassify $B_n\otimes F$ as the work substrate. The selected list $w_j\otimes x$ is sharp, equally spaced and has the original guard levels. The exact initial work state is $w_i\otimes x$, and the final joint marginal is within $\eps_n+t_n$ of $\tau\otimes w_j\otimes x$. The memory return is unchanged. Since $F$ has dimension 49 and span 12,
+Conversely, finite $\liminf_{t\downarrow0}\kappa_{\rho,\tau}(t)$ supplies an integer $K$ and a sequence $t_n\downarrow0$ with $\kappa_{\rho,\tau}(t_n)\le K$. Choose witnesses with errors $\varepsilon_n\downarrow0$. In each circuit reclassify $B_n\otimes F$ as the work substrate. The selected list $w_j\otimes x$ is sharp, equally spaced and retains its guard levels. The initial state is $w_i\otimes x$, and the output is within $\varepsilon_n+t_n$ of $\tau\otimes w_j\otimes x$. The memory still returns exactly. Since $F$ has dimension 49 and span 12,
 \[
  \dim(B_n\otimes F)\le49K,\qquad
  \operatorname{span}(B_n\otimes F)\le K+12\le49K.
 \]
-For each requested error choose one sufficiently large $n$. This is exactly the uniform-in-accuracy condition in~\eqref{eq:adiabaticdefinition}, proving the criterion.
+For each requested error choose one sufficiently large $n$. This is precisely the uniform-in-accuracy requirement in~\eqref{eq:adiabatic}.
 
 \subsection{No alternative scalar and the compensation condition}
 A strictly irreversible task has its forward direction possible and its reverse forbidden. For $A=(a,b)$ and $B=(c,d)$, finite compensation means that whenever both are strictly irreversible there is an integer $n\ge1$ for which
 \begin{equation}
- a^{\otimes n}\otimes d\ad b^{\otimes n}\otimes c.
- \label{eq:fc}
+ a^{\otimes n}\otimes d\preceq b^{\otimes n}\otimes c. \label{eq:compensation}
 \end{equation}
 The reversal is on $B$, and no auxiliary outside the displayed pair and its permitted work side effect is suppressed.
 
-If all entropy-neutral ordered pairs are possible,~\eqref{eq:monotone} and~\eqref{eq:strictcomparison} give the complete order $s(a)\le s(b)$. Additivity then makes~\eqref{eq:fc} possible once $n[s(b)-s(a)]\ge s(d)-s(c)$, since strict irreversibility now implies a strictly positive entropy change.
+If all entropy-neutral ordered pairs are possible, \eqref{eq:monotonicity} and~\eqref{eq:strict} give the complete order $s(a)\le s(b)$. Additivity then makes~\eqref{eq:compensation} possible once $n[s(b)-s(a)]\ge s(d)-s(c)$, since strict irreversibility now implies a strictly positive entropy change.
 
-If an entropy-neutral direction is forbidden, comparison makes its opposite a strictly irreversible task $A$ with zero $s$-change. Take the physical flag task $B=(x,\omega_{1/2})$. Its positive change is $\log2$; its reverse is forbidden by~\eqref{eq:monotone}. For every $n$, the change in~\eqref{eq:fc} is $-\log2$, so that task is forbidden. Finite compensation fails. If a complete additive real label existed, both $A$ and $B$ would have strictly positive changes in that label. A sufficiently large integer multiple of the first would outweigh the second, contradicting the same impossibility. This proves the scalar-entropy assertion of Theorem~\ref{thm:calibrationtest} without assuming cancellation or importing a representation theorem.
+If an entropy-neutral direction is forbidden, comparison makes its opposite a strictly irreversible task $A$ with zero $s$-change. Take the physical flag task $B=(x,\omega_{1/2})$. Its positive change is $\log2$; its reverse is forbidden by~\eqref{eq:monotonicity}. For every $n$, the change in~\eqref{eq:compensation} is $-\log2$, so that task is forbidden. Finite compensation fails. If a complete additive real label existed, both $A$ and $B$ would have strictly positive changes in that label. A sufficiently large integer multiple of the first would outweigh the second, contradicting the same impossibility. This proves the scalar-entropy assertion without assuming cancellation or importing a representation theorem.
 
 \subsection{Fixed-collateral stability}
 The fixed-collateral condition is
 \begin{equation}
- \left[\forall n\ge1,\quad a^{\otimes n}\otimes z
-             \ad b^{\otimes n}\otimes w\right]
-       \quad\Longrightarrow\quad a\ad b,
- \label{eq:fcs}
+ \left[\forall n\ge1,\quad a^{\otimes n}\otimes z\preceq b^{\otimes n}\otimes w\right]
+ \quad\Longrightarrow\quad a\preceq b, \label{eq:collateral}
 \end{equation}
-where $z,w$ are fixed finite states as $n$ varies. In the scalar case the premise gives
-$n[s(a)-s(b)]\le s(w)-s(z)$ for every $n$, hence $s(a)\le s(b)$ and the conclusion.
+where $z,w$ are fixed finite states as $n$ varies. In the scalar case the premise gives $n[s(a)-s(b)]\le s(w)-s(z)$ for every $n$, hence $s(a)\le s(b)$ and the conclusion.
 
-For an entropy-neutral irreversible $A=(a,b)$, use the forbidden reverse direction and the same flag. Every
-$b^{\otimes n}\otimes x\ad a^{\otimes n}\otimes\omega_{1/2}$
-has strictly positive $s$-change and is therefore possible by comparison. Its required conclusion $b\ad a$ is false. Thus the scalar criterion, finite compensation and fixed-collateral stability are equivalent in the stated physical class. The fixed collateral here is the same two cells for every $n$, not an abstract ordering coordinate. What can vary with $n$ is the constructor and its work calibration. These equivalences specialize the stability and numericality questions of Lieb--Yngvason and Fritz~\cite{LY,Fritz}; they do not supersede their general representation theorems.
+For an entropy-neutral irreversible $A=(a,b)$, use the forbidden reverse direction and the same flag. Every $b^{\otimes n}\otimes x\preceq a^{\otimes n}\otimes\omega_{1/2}$ has strictly positive $s$-change and is therefore possible by comparison. Its required conclusion $b\preceq a$ is false. Thus the scalar criterion, finite compensation and fixed-collateral stability are equivalent in the stated physical class. The fixed collateral is the same two cells for every $n$, not an abstract ordering coordinate. What can vary with $n$ is the constructor and its work calibration. These equivalences specialize the stability and numericality questions of Lieb--Yngvason and Fritz~\cite{lieb,fritz}; they do not supersede their general representation theorems.
 
 \section{Cancellation and adiabatic is-like}\label{app:cancellation}
-This elementary ordered-task lemma identifies the content of the assertion on Marletto's p.~40. It is not a microscopic model. Use additive notation for independent composition, with $0$ the empty substrate. Let $x\sim y$ mean mutual adiabatic accessibility and define, for same-type pair tasks,
+This ordered-task lemma identifies the content of the assertion on Marletto's p.~40. Use additive notation for independent composition, with $0$ the empty substrate. Let $x\sim y$ mean mutual adiabatic accessibility and define, for same-type pair tasks,
 \[
  (a,b)\cong(c,d)\quad\Longleftrightarrow\quad a+d\sim b+c.
 \]
 Assume a composition-compatible preorder and comparison within every type.
-
-\begin{lemma}\label{lem:cancellation}
-Transitivity of $\cong$ is equivalent to cancellation:
-$x+z\ad y+z\Longrightarrow x\ad y$.
+\begin{lemma}
+Transitivity of $\cong$ is equivalent to cancellation: $x+z\preceq y+z\Longrightarrow x\preceq y$.
 \end{lemma}
 \begin{proof}
 Assume transitivity. If $x+z\sim y+z$, put $A=(x,y)$, $I_z=(z,z)$ and $I_0=(0,0)$. Then $A\cong I_z$ and $I_z\cong I_0$. Consequently $A\cong I_0$ and $x\sim y$. This is equivalence cancellation.
 
-If only $x+z\ad y+z$ is known, comparison gives $x\ad y$ or $y\ad x$. The second case supplies the opposite auxiliary transformation by composition. Equivalence cancellation then gives $x\sim y$, also implying $x\ad y$.
+If only $x+z\preceq y+z$ is known, comparison gives $x\preceq y$ or $y\preceq x$. The second case supplies the opposite auxiliary transformation by composition. Equivalence cancellation then gives $x\sim y$, also implying $x\preceq y$.
 
 Conversely, full cancellation implies equivalence cancellation. From $a+d\sim b+c$ and $c+f\sim d+e$, composition gives $a+d+c+f\sim b+c+d+e$. Cancel $c+d$ to obtain $a+f\sim b+e$, as required.
 \end{proof}
-In the stationary completion, cancellation follows immediately from additivity and~\eqref{eq:adiabaticcriterion}. Thus transitivity is proved there rather than included among the repaired axioms.
+In the stationary completion, cancellation follows immediately from additivity and~\eqref{eq:adiabaticorder}. Thus transitivity is proved there rather than included among the modified axioms.

@@ -1,0 +1,242 @@
+{
+  "date": "2026-10-08",
+  "before_commit": "ca6fe9e24000126e6c2caa5738accb49ab3ac00d",
+  "command": "bash build.sh",
+  "fresh_directory_without_auxiliary_files": true,
+  "exit_code": 0,
+  "python": "3.12.3",
+  "pdflatex": "1.40.25 (TeX Live 2023/Debian)",
+  "source_archive": "constructor_entropy_revision_bundle.zip",
+  "source_archive_entry": "constructor_entropy_corrected/constructor_entropy_corrected.tex",
+  "source_archive_sha256": "ac4dcd7b664acadfed7353898ccfdd0493fcf49f47544fbbc04871445631e158",
+  "archive_source_sha256": "675c9dc798cb2a9054c9e9e1a391f61cf6e1bd2b45d936316f729463c1291fdb",
+  "expanded_source_sha256": "675c9dc798cb2a9054c9e9e1a391f61cf6e1bd2b45d936316f729463c1291fdb",
+  "exact_source_expansion_match": true,
+  "files": [
+    "main.tex",
+    "axioms.tex",
+    "new_proofs.tex",
+    "classical_proofs.tex",
+    "quantum_checks.tex",
+    "references.tex"
+  ],
+  "before_bundled_source_build_pages": 25,
+  "before_bundled_source_matches_final_text": false,
+  "final_pdf": "constructor_entropy.pdf",
+  "final_pdf_sha256": "f850bd94a8c3687f60f2740f7059fab0306ed682581f41cb766472fba1ec1e0b",
+  "rebuilt_pdf_sha256": "f8918ce9b53953007f34b125983761cb10fba49ca9b4e76a198e765b1772e445",
+  "pdf_pages": 25,
+  "all_page_text_identical": true,
+  "layout_text_sha256": "c6631f6256809c5ef8de8d1da0c024dac163a89ddac20e497a032a6f7317bcc0",
+  "all_page_pixels_identical": true,
+  "renderer": "MuPDF 1.28.2 (PyMuPDF 1.28.2)",
+  "render_dpi": 144,
+  "page_comparison": [
+    {
+      "page": 1,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 2,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 3,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 4,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 5,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 6,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 7,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 8,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 9,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 10,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 11,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 12,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 13,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 14,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 15,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 16,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 17,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 18,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 19,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 20,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 21,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 22,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 23,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 24,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    },
+    {
+      "page": 25,
+      "pixels": [
+        1191,
+        1684
+      ],
+      "differing_pixels": 0
+    }
+  ],
+  "latex_final_diagnostics": [],
+  "retained_finite_check_programs": "Both passed; result files unchanged.",
+  "supplied_final_pdf_preserved": true,
+  "final_pdf_matches_bundled_source": true,
+  "byte_identity_required": false,
+  "scope": "Exact archived source recovery, lossless appendix split, source compilation, all-page text and pixel reproduction, and retained finite checks; not a formal verification of manuscript theorems."
+}
